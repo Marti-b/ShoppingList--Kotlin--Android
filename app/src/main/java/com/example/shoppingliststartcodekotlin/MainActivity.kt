@@ -14,6 +14,8 @@ import com.example.shoppingliststartcodekotlin.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+
 //import kotlinx.android.synthetic.main.content_main.*
 //import kotlinx.android.synthetic.main.activity_main.*
 
@@ -50,8 +52,42 @@ class MainActivity : AppCompatActivity() {
             updateUI(it)
         })
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        Log.d("icon_pressed", "${item.itemId}")
+        when (item.itemId) {
+            R.id.item_about -> {
+                Toast.makeText(this, "About item clicked!", Toast.LENGTH_LONG)
+                    .show()
+                return true
+            }
+            R.id.item_delete -> {
+                Toast.makeText(this, "Delete item clicked!", Toast.LENGTH_LONG)
+                    .show()
+                return true
+            }
+            R.id.item_help -> {
+                Toast.makeText(this, "Help item clicked!", Toast.LENGTH_LONG)
+                    .show()
+                return true
+            }
+            R.id.item_refresh -> {
+                Toast.makeText(this, "Refresh item clicked!", Toast.LENGTH_LONG)
+                    .show()
+                return true
+            }
+        }
 
+        return false //we did not handle the event
 
+    }
     fun updateUI(products : MutableList<Product>) {
         val layoutManager = LinearLayoutManager(this)
 
