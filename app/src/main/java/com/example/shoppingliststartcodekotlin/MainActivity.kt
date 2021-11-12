@@ -16,27 +16,22 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 
-//import kotlinx.android.synthetic.main.content_main.*
-//import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     //you need to have an Adapter for the products
-   private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+   lateinit var adapter:  ProductAdapter
    lateinit var binding : ActivityMainBinding
    lateinit var viewModel : MainViewModel
 
-    private var layoutManager: RecyclerView.LayoutManager? = null
+    //private var layoutManager: RecyclerView.LayoutManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card_layout)
        // setSupportActionBar(toolbar)
-        layoutManager = LinearLayoutManager(this)
-       /* binding.recyclerView.layoutManager = layoutManager
-        adapter = RecyclerAdapter()
-        binding.recyclerView.adapter = adapter*/
+
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -95,12 +90,12 @@ class MainActivity : AppCompatActivity() {
         xml file - in this case the id of the recyclerview should
         be "recyclerView" - as the code line below uses that */
 
-        //binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.layoutManager = layoutManager
 
-       //adapter = ProductAdapter(products)
+        adapter = ProductAdapter(products)
 
       /*connecting the recyclerview to the adapter  */
-        //binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
     }
 }
