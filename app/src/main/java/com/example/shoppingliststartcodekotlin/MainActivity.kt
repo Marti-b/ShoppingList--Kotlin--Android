@@ -6,15 +6,16 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import com.example.shoppingliststartcodekotlin.adapters.ProductAdapter
 import com.example.shoppingliststartcodekotlin.data.Product
 import com.example.shoppingliststartcodekotlin.databinding.ActivityMainBinding
 
-import com.google.android.material.snackbar.Snackbar
+
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+
 
 
 class MainActivity : AppCompatActivity() {

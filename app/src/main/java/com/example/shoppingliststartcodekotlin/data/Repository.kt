@@ -21,8 +21,22 @@ object Repository {
     {
         //add some products to the products list - for testing purposes
         Log.d("Repository","create testdata")
-        products.add(Product(name="tomater"))
-        products.add(Product(name="bønner"))
+        products.add(Product(name="Dolce Gabbana The One", type = "Eau de Parfum"))
+        products.add(Product(name="Versace Eros", type = "Eau de Toilette"))
+        products.add(Product(name="Chanel Allure Homme Sport", type = "Eau de Toilette"))
+        products.add(Product(name="YSL La Nuit de L'Homme", type = "Eau de Toilette"))
+        products.add(Product(name="CH Man Prive", type = "Eau de Toilette"))
+    }
+    fun addProducts(product : Product){
+        products.add(product)
+    }
+    fun deleteProduct(index:Int){
+        products.removeAt(index)
+        productListener.value = products
+    }
+    fun deleteAllProducts(){
+        products.clear()
+        productListener.value = products
     }
 
 }
