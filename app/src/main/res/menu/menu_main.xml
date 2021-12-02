@@ -24,8 +24,8 @@
         android:title="@string/about"/>
 
     <item
-        android:id="@+id/item_delete"
+        android:id="@+id/item_delete_all"
         app:showAsAction="never"
         android:orderInCategory="4"
-        android:title="@string/delete"/>
+        android:title="@string/delete_all"/>
 </menu>

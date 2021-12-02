@@ -15,7 +15,7 @@ import com.example.shoppingliststartcodekotlin.databinding.ActivityMainBinding
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-
+import com.example.shoppingliststartcodekotlin.data.Repository
 
 
 class MainActivity : AppCompatActivity() {
@@ -64,9 +64,8 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 return true
             }
-            R.id.item_delete -> {
-                Toast.makeText(this, "Delete item clicked!", Toast.LENGTH_LONG)
-                    .show()
+            R.id.item_delete_all -> {
+                Repository.deleteAllProducts()
                 return true
             }
             R.id.item_help -> {
