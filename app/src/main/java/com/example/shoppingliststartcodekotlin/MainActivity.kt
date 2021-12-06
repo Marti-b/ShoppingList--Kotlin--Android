@@ -1,5 +1,6 @@
 package com.example.shoppingliststartcodekotlin
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,8 @@ import com.example.shoppingliststartcodekotlin.databinding.ActivityMainBinding
 
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import com.example.shoppingliststartcodekotlin.data.Repository
 
