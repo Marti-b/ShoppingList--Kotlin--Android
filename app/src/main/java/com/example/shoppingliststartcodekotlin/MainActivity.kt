@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("Products","Found ${it.size} products")
             updateUI(it)
         })
+        binding.addProductTextView.setOnClickListener{
+            openAddToListDialog()
+        }
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -100,5 +103,32 @@ class MainActivity : AppCompatActivity() {
       /*connecting the recyclerview to the adapter  */
         binding.recyclerView.adapter = adapter
 
+    }
+    fun openAddToListDialog(){
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.addtolist_dialog)
+
+        val cancelBtn = dialog.findViewById<Button>(R.id.cancel_button)
+        val addToListBtn = dialog.findViewById<Button>(R.id.add_button)
+        val itemName = dialog.findViewById<EditText>(R.id.addItemName)
+        val itemQuantity = dialog.findViewById<EditText>(R.id.addItemQuantity)
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        addToListBtn.setOnClickListener {
+            val name : String = itemName.text.toString()
+            val quantity : String = itemQuantity.text.toString()
+            if (name.isNotEmpty() && quantity.isNotEmpty()) {
+                Repository.addProducts(Product(name, quantity))
+                Toast.makeText(applicationContext, "Item added to the list", Toast.LENGTH_LONG).show()
+                Repository.getData()
+                dialog.dismiss()
+            } else {
+                Toast.makeText(applicationContext, "Item cannot be added, please don't leave any fields empty", Toast.LENGTH_LONG).show()
+            }
+
+        }
+        dialog.show()
     }
 }

@@ -9,13 +9,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/addProduct_layout"
         android:layout_width="match_parent"
-        android:layout_height="147dp"
+        android:layout_height="wrap_content"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <Button
             android:id="@+id/addProductTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,38 +30,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.125" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addProductTextView">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="255dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:textColor="@color/black"
-
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="54dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addItemName"
-                    android:layout_width="233dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:hint="Enter Item Name"
-                    android:inputType="text"
-                    android:textSize="14sp">
-
-                </com.google.android.material.textfield.TextInputEditText>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
