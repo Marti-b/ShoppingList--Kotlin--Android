@@ -75,15 +75,13 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         Log.d("icon_pressed", "${item.itemId}")
         when (item.itemId) {
-            R.id.item_about -> {
+           /* R.id.item_about -> {
                 Toast.makeText(this, "About item clicked!", Toast.LENGTH_LONG)
                     .show()
                 return true
-            }
+            }*/
             R.id.item_delete_all -> {
-                Repository.deleteAllProducts()
-                products.clear()
-                updateUI(products)
+                openDeleteAllDialog()
                 return true
             }
             /*R.id.item_help -> {
@@ -135,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                 Repository.addProducts(Product(name, quantity))
                 Toast.makeText(applicationContext, "Item added to the list", Toast.LENGTH_LONG).show()
                 products.clear()
+
                 viewModel.getData()
                 dialog.dismiss()
             } else {
@@ -143,5 +142,23 @@ class MainActivity : AppCompatActivity() {
 
         }
         dialog.show()
+    }
+    fun openDeleteAllDialog(){
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.delete_alert_dialog)
+
+        val cancelBtn = dialog.findViewById<Button>(R.id.cancelDelete_button)
+        val deleteAllButton = dialog.findViewById<Button>(R.id.deleteAll_button)
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        deleteAllButton.setOnClickListener {
+            Repository.deleteAllProducts()
+            products.clear()
+
+            dialog.dismiss()
+        }
+       dialog.show()
     }
 }
