@@ -21,9 +21,7 @@ import android.widget.Toast
 import com.example.shoppingliststartcodekotlin.data.Repository
 import com.example.shoppingliststartcodekotlin.data.Repository.products
 import com.google.firebase.FirebaseApp
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,11 +30,6 @@ class MainActivity : AppCompatActivity() {
    lateinit var adapter:  ProductAdapter
    lateinit var binding : ActivityMainBinding
    lateinit var viewModel : MainViewModel
-
-    //private var layoutManager: RecyclerView.LayoutManager? = null
-
-   //Database
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +51,18 @@ class MainActivity : AppCompatActivity() {
             Log.d("Products","Found ${it.size} products")
             updateUI(it)
         })
-        binding.addProductTextView.setOnClickListener{
+        binding.addProductButton.setOnClickListener{
             openAddToListDialog()
         }
+        binding.sortNameButton.setOnClickListener {
+            products.sortBy { it.name }
+            adapter.notifyDataSetChanged()
+        }
+        binding.sortQuantityButton.setOnClickListener {
+            products.sortByDescending { it.quantity }
+            adapter.notifyDataSetChanged()
+        }
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -80,10 +82,11 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.item_delete_all -> {
                 Repository.deleteAllProducts()
-                updateUI()
+                products.clear()
+                updateUI(products)
                 return true
             }
-            R.id.item_help -> {
+            /*R.id.item_help -> {
                 Toast.makeText(this, "Help item clicked!", Toast.LENGTH_LONG)
                     .show()
                 return true
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Refresh item clicked!", Toast.LENGTH_LONG)
                     .show()
                 return true
-            }
+            }*/
         }
 
         return false //we did not handle the event
@@ -131,6 +134,7 @@ class MainActivity : AppCompatActivity() {
             if (name.isNotEmpty() && quantity.isNotEmpty()) {
                 Repository.addProducts(Product(name, quantity))
                 Toast.makeText(applicationContext, "Item added to the list", Toast.LENGTH_LONG).show()
+                products.clear()
                 viewModel.getData()
                 dialog.dismiss()
             } else {

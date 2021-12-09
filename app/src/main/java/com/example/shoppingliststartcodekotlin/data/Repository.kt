@@ -23,25 +23,12 @@ object Repository {
 
 
     fun getData(): MutableLiveData<MutableList<Product>> {
-        //readDataFromFireBase()
-        val db = Firebase.firestore
-        db.collection("products").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d("Repository", "${document.id} => ${document.data}")
-                    val product = document.toObject<Product>()
-                    product.id = document.id  //set the ID in the product class
-                    products.add(product)
-                }
-                productListener.value = products //notify our listener we have new data
-            }
-            .addOnFailureListener { exception ->
-                Log.d("Repository", "Error getting documents: ", exception)
-            }
+        readDataFromFireBase()
+        productListener.value = products
         return productListener
     }
 
-    /* fun readDataFromFireBase()
+     fun readDataFromFireBase()
     {
         val db = Firebase.firestore
         db.collection("products").get()
@@ -57,7 +44,7 @@ object Repository {
             .addOnFailureListener { exception ->
                 Log.d("Repository", "Error getting documents: ", exception)
             }
-    }*/
+    }
 
 
     fun addProducts(product : Product){
@@ -85,9 +72,7 @@ object Repository {
             val ref = db.collection("products").document(product.id)
             batch.delete(ref)
         }
-        batch.commit().addOnCompleteListener {
-        }
-
+        batch.commit().addOnCompleteListener {}
 
     }
     fun setContext(cont: Context) {
