@@ -19,6 +19,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.shoppingliststartcodekotlin.data.Repository
+import com.example.shoppingliststartcodekotlin.data.Repository.products
+import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,12 +35,14 @@ class MainActivity : AppCompatActivity() {
 
     //private var layoutManager: RecyclerView.LayoutManager? = null
 
+   //Database
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card_layout)
        // setSupportActionBar(toolbar)
-
+        Repository.setContext(this)
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -44,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
+        FirebaseApp.initializeApp(applicationContext)
 
 
         viewModel.getData().observe(this, Observer {
@@ -72,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.item_delete_all -> {
                 Repository.deleteAllProducts()
+                updateUI()
                 return true
             }
             R.id.item_help -> {
@@ -122,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             if (name.isNotEmpty() && quantity.isNotEmpty()) {
                 Repository.addProducts(Product(name, quantity))
                 Toast.makeText(applicationContext, "Item added to the list", Toast.LENGTH_LONG).show()
-                Repository.getData()
+                viewModel.getData()
                 dialog.dismiss()
             } else {
                 Toast.makeText(applicationContext, "Item cannot be added, please don't leave any fields empty", Toast.LENGTH_LONG).show()

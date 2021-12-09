@@ -8,6 +8,8 @@ import com.example.shoppingliststartcodekotlin.data.Repository
 
 class MainViewModel: ViewModel() {
 
+   // var products : MutableLiveData<List<Product>> = MutableLiveData(listOf())
+
     fun getData(): MutableLiveData<MutableList<Product>> {
         return Repository.getData()
     }

@@ -1,3 +1,8 @@
 package com.example.shoppingliststartcodekotlin.data
 
-data class Product(var name:String = "", var type:String = "") {}
+import android.os.Parcelable
+import com.google.firebase.database.Exclude
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Product(var name:String = "", var quantity:String = "",  @get:Exclude var id: String = ""): Parcelable  {}
