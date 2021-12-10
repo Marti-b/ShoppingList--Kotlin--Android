@@ -24,7 +24,7 @@ class ProductAdapter(var products: MutableList<Product>) :
     }
     override fun onBindViewHolder(holder: ProductAdapter.ViewHolder, position: Int) {
         holder.itemTitle.text = products[position].name
-        holder.itemDetail.text = products[position].quantity
+        holder.itemDetail.text = products[position].quantity.toString()
     }
 
     override fun getItemCount(): Int {
@@ -48,7 +48,5 @@ class ProductAdapter(var products: MutableList<Product>) :
                 notifyItemRemoved(position) //this line notify the adapter
             }
         }
-
-
     }
 }

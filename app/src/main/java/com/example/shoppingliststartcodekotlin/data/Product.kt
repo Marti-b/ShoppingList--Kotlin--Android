@@ -5,4 +5,4 @@ import com.google.firebase.database.Exclude
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Product(var name:String = "", var quantity:String = "",  @get:Exclude var id: String = ""): Parcelable  {}
+data class Product(var name:String = "", var quantity:Int = 0,  @get:Exclude var id: String = ""): Parcelable  {}

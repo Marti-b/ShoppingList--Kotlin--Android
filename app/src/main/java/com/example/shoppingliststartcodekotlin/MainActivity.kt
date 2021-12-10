@@ -122,18 +122,17 @@ class MainActivity : AppCompatActivity() {
         val addToListBtn = dialog.findViewById<Button>(R.id.add_button)
         val itemName = dialog.findViewById<EditText>(R.id.addItemName)
         val itemQuantity = dialog.findViewById<EditText>(R.id.addItemQuantity)
-
         cancelBtn.setOnClickListener {
             dialog.dismiss()
         }
         addToListBtn.setOnClickListener {
             val name : String = itemName.text.toString()
             val quantity : String = itemQuantity.text.toString()
+            val quantityInt : Int = quantity.toInt()
             if (name.isNotEmpty() && quantity.isNotEmpty()) {
-                Repository.addProducts(Product(name, quantity))
+                Repository.addProducts(Product(name, quantityInt))
                 Toast.makeText(applicationContext, "Item added to the list", Toast.LENGTH_LONG).show()
                 products.clear()
-
                 viewModel.getData()
                 dialog.dismiss()
             } else {
